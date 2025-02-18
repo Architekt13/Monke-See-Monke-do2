@@ -1,0 +1,59 @@
+/* src/components/Footer.css */
+.footer {
+  background: linear-gradient(to right, #670A0A, #120000);
+  border-top: 2px solid #D00B0B;
+  color: #FCFCFC; /* White text color */
+  padding: 20px;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #FCFCFC; /* Light border to separate sections */
+}
+
+.sponsor-logos {
+  display: flex;
+  gap: 70px; /* Space between logos */
+  align-items: center;
+}
+
+.sponsor-logo {
+  height: 70px; /* Adjust based on your logo size */
+  width: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.logo-symbol img {
+  height: 100px; /* Adjust size as needed */
+  width: auto;
+  margin-top: 10px;
+}
+
+.copyright {
+  margin: 10px 0;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.footer-links a {
+  color: #FCFCFC;
+  text-decoration: none;
+  font-size: 1em;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}

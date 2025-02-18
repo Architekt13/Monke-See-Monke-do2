@@ -1,0 +1,33 @@
+/* src/customScrollbar.css */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #200000; /* Using your page's background color */
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #670A0A; /* Blood Red */
+    border-radius: 10px; /* Rounded corners */
+    transition: border-radius 0.3s; /* Smooth transition for border-radius */
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #D00B0B; /* Lighter version of the red color for hover */
+  }
+  
+  /* Additional styles for top and bottom states */
+  html.scroll-top ::-webkit-scrollbar-thumb {
+    border-radius: 0 0 10px 10px; /* Flatten the top */
+  }
+  
+  html.scroll-bottom ::-webkit-scrollbar-thumb {
+    border-radius: 10px 10px 0 0; /* Flatten the bottom */
+  }
+  

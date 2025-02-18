@@ -1,0 +1,46 @@
+/* src/components/Header.css */
+.header {
+  background: linear-gradient(to right, #670A0A, #120000); /* Gradient background */
+  color: #FCFCFC; /* White */
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed; /* Fix the header at the top */
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Ensures the header stays above other content */
+  border-bottom: 2px solid #D00B0B; /* Bottom border in Blood Red */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.header .logo a {
+  color: #FCFCFC; /* White */
+  text-decoration: none;
+  font-size: 1.5em;
+  margin-right: 20px; /* Space between logo and nav-links */
+}
+
+.header .logo a:hover {
+  color: #FCFCFC;
+  text-decoration: underline;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  color: #FCFCFC; /* White */
+  text-decoration: none;
+  transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.nav-links li a:hover {
+  color: #FCFCFC; /* Floral White */
+  text-decoration: underline;
+}

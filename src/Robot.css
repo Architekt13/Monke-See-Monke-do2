@@ -1,0 +1,176 @@
+/* Import a semi-futuristic font */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+
+/* Allow scrolling by ensuring the body takes full height */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Orbitron', sans-serif; /* Use the semi-futuristic font */
+  background-color: #000;
+  color: #fff;
+  overflow-y: scroll; /* Make sure vertical scrolling is enabled */
+  padding-top: 100px; /* Add padding for the navbar */
+}
+
+/* Navigation Bar */
+.navbar {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 1200px;
+  height: 80px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.navbar.shrink {
+  height: 80px;
+  width: 80px;
+  border-radius: 30px;
+  justify-content: center;
+}
+
+.navbar.shrink:hover {
+  height: 80px;
+  width: 80%;
+}
+
+.navbar .logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);  /* Center the logo */
+}
+
+/* Logo image should adjust size accordingly */
+.navbar .logo img {
+  height: 40px; /* Adjust the height of the logo */
+  transition: opacity 0.3s ease, height 0.3s ease;
+}
+
+.navbar.shrink .logo img {
+  height: 40px; /* Adjust the height of the logo when shrunk */
+  opacity: 0.8;
+}
+
+.navbar .nav-links {
+  display: flex;
+  gap: 40px; /* Increase the gap between the links */
+  transition: opacity 0.5s ease; /* Smooth transition for nav-links */
+  opacity: 1; /* Ensure nav-links are visible */
+}
+
+.navbar .nav-links.left {
+  margin-right: auto;
+}
+
+.navbar .nav-links.right {
+  margin-left: auto;
+}
+
+.navbar .nav-links a {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: opacity 0.3s ease;
+}
+
+.navbar.shrink .nav-links {
+  opacity: 0; /* Fade out nav-links */
+}
+
+.navbar.shrink:hover .nav-links {
+  opacity: 1; /* Fade in nav-links */
+}
+
+
+.banner {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url('wavyBackground.png') no-repeat center center fixed, linear-gradient(135deg, #ff7e5f, #feb47b);
+  background-size: cover;
+  text-align: center;
+  color: white;
+  transition: opacity 0.5s ease-out; /* Smooth transition for opacity */
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+h1, h2 {
+  color: #BCA072; /* Gold color for text */
+  font-size: 3rem;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Optional text shadow for contrast */
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-top: 20px;
+}
+
+/* Countdown Section */
+.countdown-section {
+  padding: 50px;
+  text-align: center;
+  background-color: #111;
+}
+
+.countdown-timer {
+  font-size: 2em;
+  color: #333;
+}
+
+.countdown-timer p {
+  font-size: 1.5rem;
+  color: #BCA072; /* Gold color */
+}
+
+/* Additional Sections */
+.section {
+  padding: 50px;
+  text-align: center;
+  background-color: #222;
+  color: #fff;
+}
+
+.section h2 {
+  color: #BCA072; /* Gold color */
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.section p {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+.sponsors-link {
+  color: #BCA072; /* Gold color */
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+/* Scrollable Content */
+.content {
+  padding: 100px 20px;
+}

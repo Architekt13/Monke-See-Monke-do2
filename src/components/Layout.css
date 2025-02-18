@@ -1,0 +1,20 @@
+/* src/components/Layout.css */
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 100vw;
+  }
+
+  .content {
+    flex: 1;
+    padding: 0px;
+  }
+  
+  .footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+  }
+  

@@ -1,0 +1,15 @@
+/* App.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+.App {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #ffffff;
+  background-color: #000000; /* You can set the background color here */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
