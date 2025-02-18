@@ -1,19 +1,40 @@
-/* Import a semi-futuristic font */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+/* src/Robot.css */
 
-/* Allow scrolling by ensuring the body takes full height */
-html, body {
-  height: 100%;
+/* Define the Ethnocentric font */
+@font-face {
+  font-family: 'Ethnocentric';
+  src: url('./fonts/EthnoNormal.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ethnocentric';
+  src: url('./fonts/EthnoItal.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+/* Reset body padding since we're using full viewport height */
+body {
+  background-color: #000;
+  color: #fff;
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
+  font-family: 'Ethnocentric', sans-serif; /* Use the Ethnocentric font */
 }
 
 body {
-  font-family: 'Orbitron', sans-serif; /* Use the semi-futuristic font */
   background-color: #000;
   color: #fff;
   overflow-y: scroll; /* Make sure vertical scrolling is enabled */
   padding-top: 100px; /* Add padding for the navbar */
+}
+
+/* Apply the font to specific elements */
+h1, h2, p, a, .navbar, .countdown-timer {
+  font-family: 'Ethnocentric', sans-serif; /* Apply the font to specific elements */
 }
 
 /* Navigation Bar */
@@ -82,10 +103,14 @@ body {
 
 .navbar .nav-links a {
   color: #fff;
-  font-weight: bold;
   text-decoration: none;
   font-size: 1rem;
+  font-weight: bold; /* Make the nav links bold */
   transition: opacity 0.3s ease;
+}
+
+.navbar .nav-links a.active {
+  color: #BCA072; /* Gold color for active link */
 }
 
 .navbar.shrink .nav-links {
@@ -96,81 +121,186 @@ body {
   opacity: 1; /* Fade in nav-links */
 }
 
-
+/* Hero Section */
 .banner {
-  height: 100vh;
+  position: relative;
+  min-height: 100vh; /* Ensure minimum height is full viewport */
+  height: 100vh; /* Force exact viewport height */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: url('wavyBackground.png') no-repeat center center fixed, linear-gradient(135deg, #ff7e5f, #feb47b);
-  background-size: cover;
   text-align: center;
   color: white;
-  transition: opacity 0.5s ease-out; /* Smooth transition for opacity */
-}
-
-@keyframes gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-h1, h2 {
-  color: #BCA072; /* Gold color for text */
-  font-size: 3rem;
+  overflow: hidden;
+  padding: 0 20px;
   margin: 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Optional text shadow for contrast */
+  padding-top: 200px; /* Add padding to ensure text doesn't overlap with navbar */
 }
 
-h2 {
-  font-size: 1.8rem;
+.banner h1 {
+  font-size: 4rem;
+  margin: 0;
+  background: linear-gradient(45deg, #fff, #BCA072);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(188, 160, 114, 0.3);
+  animation: titleFloat 3s ease-in-out infinite;
+}
+
+.banner h2 {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  opacity: 0.9;
+  letter-spacing: 2px;
+  animation: subtitleFloat 3s ease-in-out infinite 0.5s;
+}
+
+.hero-image {
+  max-width: 50%;
+  opacity: 0.8;
   margin-top: 20px;
 }
 
-/* Countdown Section */
-.countdown-section {
-  padding: 50px;
-  text-align: center;
-  background-color: #111;
+@keyframes titleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
-.countdown-timer {
-  font-size: 2em;
-  color: #333;
+@keyframes subtitleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
-.countdown-timer p {
-  font-size: 1.5rem;
-  color: #BCA072; /* Gold color */
+/* Content wrapper to ensure proper spacing after hero */
+.content-wrapper {
+  position: relative;
+  z-index: 2;
+  background: #000;
+  padding-top: 200px; /* Increase padding to ensure content is not covered by navbar */
 }
 
-/* Additional Sections */
+/* Content Sections */
 .section {
-  padding: 50px;
+  padding: 100px 20px;
   text-align: center;
-  background-color: #222;
-  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(188, 160, 114, 0.1), transparent);
+  z-index: -1;
 }
 
 .section h2 {
-  color: #BCA072; /* Gold color */
-  font-size: 2rem;
+  color: #BCA072;
+  font-size: 2.5rem;
   margin-bottom: 20px;
 }
 
 .section p {
-  font-size: 1.2rem;
-  color: #ccc;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 600px;
+  margin: 0 auto 40px;
+  font-size: 1.1rem;
+  line-height: 1.6;
 }
 
-.sponsors-link {
-  color: #BCA072; /* Gold color */
-  text-decoration: none;
-  font-size: 1.5rem;
+.section-image {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Scrollable Content */
-.content {
-  padding: 100px 20px;
+.section-image:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(188, 160, 114, 0.2);
+}
+
+/* Section Grid */
+.section-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Gallery Section */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.gallery-item {
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+}
+
+.gallery-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-image:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(188, 160, 114, 0.2);
+}
+
+.fade-in-up {
+  animation: fadeInUp 1s ease-out;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .banner h1 {
+    font-size: 2.5rem;
+  }
+  
+  .banner h2 {
+    font-size: 1.2rem;
+  }
+  
+  .section h2 {
+    font-size: 2rem;
+  }
+
+  .section-grid {
+    grid-template-columns: 1fr;
+  }
 }
