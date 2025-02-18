@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import './Home.css'; // Update the path to your CSS file
-import logo from './SPADELOGO.jpg'; // Update the path to your logo
-import blogImage from './images/blog-image.jpg'; // Add the path to your blog image
-import robotImage from './images/PROTO-1-ROBOT-BGR-UP.png'; // Add the path to your robot image
-import sponsorsImage from './images/FIRST-RGB.png'; // Add the path to your sponsors image
+import { Link, useLocation } from 'react-router-dom';
+import './Home.css';
+import logo from './SPADELOGO.jpg';
+import blogImage from './images/blog-image.jpg';
+import robotImage from './images/PROTO-1-ROBOT-BGR-UP.png';
+import sponsorsImage from './images/FIRST-RGB.png';
+import WaveBackground from './components/WaveBackground';
 
 function Home() {
   const [timeLeft, setTimeLeft] = useState({
@@ -16,7 +17,8 @@ function Home() {
 
   const [opacity, setOpacity] = useState(1);
   const [shrinkNav, setShrinkNav] = useState(false);
-  let lastScrollPos = 0;
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const location = useLocation();
 
   // Countdown Timer Logic
   useEffect(() => {
@@ -44,74 +46,113 @@ function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const opacityValue = 1 - scrollPosition / 600; // Adjust the fade effect based on scroll
-      setOpacity(Math.max(opacityValue, 0)); // Prevent opacity from going below 0
-      console.log(scrollPosition);
-      // Shrink Navbar Logic
-      if (scrollPosition > 150) {
-        setShrinkNav(true);  // Shrink navbar after scrolling 10px
-      } else {
-        setShrinkNav(false); // Restore navbar if less than 10px
+      const scrollY = window.scrollY;
+      const opacityValue = 1 - scrollY / 600;
+      setOpacity(Math.max(opacityValue, 0));
+      
+      // Smooth navbar transition based on scroll direction and speed
+      if (scrollY > lastScrollY) { // Scrolling down
+        if (scrollY > 150) {
+          setShrinkNav(true);
+        }
+      } else { // Scrolling up
+        if (scrollY < 100) {
+          setShrinkNav(false);
+        }
       }
-      lastScrollPos = window.scrollY;
+      
+      setLastScrollY(scrollY);
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
+
+  // Function to determine if a link is active
+  const isLinkActive = (path) => {
+    return location.pathname === path;
+  };
 
   return (
     <div>
       <div className={`navbar ${shrinkNav ? 'shrink' : ''}`}>
         <div className="nav-links left">
-          <Link to="/">Home</Link>
-          <Link to="/blog">Blog</Link>
+          <Link to="/" className={isLinkActive('/') ? 'active' : ''}>
+            Home
+          </Link>
+          <Link to="/robot" className={isLinkActive('/robot') ? 'active' : ''}>
+            Our Robot
+          </Link>
         </div>
         <Link to="/" className="logo">
           <img src={logo} alt="ACE Robotics Logo" />
         </Link>
         <div className="nav-links right">
-          <Link to="/robot">Our Robot</Link>
-          <Link to="/sponsors">Sponsors</Link>
+          <Link to="/blog" className={isLinkActive('/blog') ? 'active' : ''}>
+            Blog
+          </Link>
+          <Link to="/sponsors" className={isLinkActive('/sponsors') ? 'active' : ''}>
+            Sponsors
+          </Link>
         </div>
       </div>
 
       <div className="banner fade-in-up" style={{ opacity }}>
-        <h1>Welcome to the ACE Blog</h1>
-        <h2>The next generation of innovators</h2>
-      </div>
-
-      <div className="countdown-section fade-in-up">
-        <h2>Countdown to Regionals:</h2>
-        <div className="countdown-timer curved-box">
-          <p>
-            {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
-          </p>
+        <WaveBackground />
+        <h1>ACE Robotics</h1>
+        <h2>Engineering Tomorrow's Champions</h2>
+        <div className="scroll-indicator" onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}>
+          <div className="arrow"></div>
+          <div className="arrow"></div>
         </div>
       </div>
 
-      <div className="section fade-in-up" id="blog">
-        <h2>Our Blog</h2>
-        <p>Stay updated with the latest news and updates from our team.</p>
-        <Link to="/blog">
-          <img src={blogImage} alt="Blog" className="section-image" />
-        </Link>
-      </div>
+      <div className="content-wrapper">
+        <div className="countdown-section fade-in-up">
+          <h2>Road to Regionals</h2>
+          <div className="countdown-grid">
+            <div className="countdown-box">
+              <div className="countdown-value">{timeLeft.days}</div>
+              <div className="countdown-label">Days</div>
+            </div>
+            <div className="countdown-box">
+              <div className="countdown-value">{timeLeft.hours}</div>
+              <div className="countdown-label">Hours</div>
+            </div>
+            <div className="countdown-box">
+              <div className="countdown-value">{timeLeft.minutes}</div>
+              <div className="countdown-label">Minutes</div>
+            </div>
+            <div className="countdown-box">
+              <div className="countdown-value">{timeLeft.seconds}</div>
+              <div className="countdown-label">Seconds</div>
+            </div>
+          </div>
+        </div>
 
-      <div className="section fade-in-up" id="robot">
-        <h2>Our Robot</h2>
-        <p>Learn more about the technology and innovation behind our robot.</p>
-        <Link to="/robot">
-          <img src={robotImage} alt="Robot" className="section-image" />
-        </Link>
-      </div>
+        <div className="section fade-in-up" id="robot">
+          <h2>Meet Our Robot</h2>
+          <p>Experience the culmination of innovation, engineering, and teamwork. Our robot represents months of dedication and cutting-edge design.</p>
+          <Link to="/robot">
+            <img src={robotImage} alt="Our Robot" className="section-image" />
+          </Link>
+        </div>
 
-      <div className="section fade-in-up" id="sponsors">
-        <h2>Our Sponsors</h2>
-        <p>We are grateful for the support from our sponsors.</p>
-        <Link to="/sponsors">
-          <img src={sponsorsImage} alt="Sponsors" className="section-image" />
-        </Link>
+        <div className="section fade-in-up" id="blog">
+          <h2>Latest Updates</h2>
+          <p>Follow our journey through competitions, workshops, and engineering challenges. Get insights into our team's progress and innovations.</p>
+          <Link to="/blog">
+            <img src={blogImage} alt="Team Blog" className="section-image" />
+          </Link>
+        </div>
+
+        <div className="section fade-in-up" id="sponsors">
+          <h2>Our Partners</h2>
+          <p>Success in robotics requires strong partnerships. Meet the organizations that help make our innovations possible.</p>
+          <Link to="/sponsors">
+            <img src={sponsorsImage} alt="Our Sponsors" className="section-image" />
+          </Link>
+        </div>
       </div>
     </div>
   );
